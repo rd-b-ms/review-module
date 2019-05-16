@@ -1,0 +1,11 @@
+DROP DATABASE IF EXCISTS reviews
+
+CREATE DATABASE reviews
+
+USE reviews
+
+CREATE TABLE Messages (
+  id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  User_id int NOT NULL FOREIGN KEY,
+  
+)
