@@ -1,12 +1,14 @@
 /* eslint-disable react/no-unused-state */
 import React from 'react';
 import axios from 'axios';
+import MapReviews from './mapReviews.jsx';
+import ReviewBar from './RatingBar.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentReviews: '',
+      currentReviews: [],
     };
   }
 
@@ -18,7 +20,14 @@ class App extends React.Component {
   }
 
   render() {
-    return (<div> Hello World </div>);
+    const { currentReviews } = this.state;
+    console.log(currentReviews);
+    return (
+      <div>
+        <ReviewBar ratings={currentReviews} />
+        <MapReviews reviews={currentReviews} />
+      </div>
+    );
   }
 }
 

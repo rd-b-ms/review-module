@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/../public')));
 const Port = 3001;
 
-app.get('/messages', function(req, res) {
+app.get('/messages', (req, res) => {
   db.getMessages((err, data) => {
     if (err) {
       res.status(500);
@@ -19,7 +19,7 @@ app.get('/messages', function(req, res) {
       res.status(200);
       res.send(data);
     }
-  })
+  });
 });
 
 app.listen(Port, () => {
