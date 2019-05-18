@@ -1,7 +1,6 @@
-/* eslint-disable react/no-unused-state */
 import React from 'react';
 import axios from 'axios';
-import MapReviews from './mapReviews.jsx';
+import ReviewList from './ReviewList.jsx';
 import ReviewBar from './RatingBar.jsx';
 
 class App extends React.Component {
@@ -14,18 +13,17 @@ class App extends React.Component {
 
   componentDidMount() {
     axios.get('/messages')
-      .then((responce) => {
-        this.setState({ currentReviews: responce.data });
+      .then((response) => {
+        this.setState({ currentReviews: response.data });
       });
   }
 
   render() {
     const { currentReviews } = this.state;
-    console.log(currentReviews);
     return (
       <div>
         <ReviewBar ratings={currentReviews} />
-        <MapReviews reviews={currentReviews} />
+        <ReviewList reviews={currentReviews} />
       </div>
     );
   }

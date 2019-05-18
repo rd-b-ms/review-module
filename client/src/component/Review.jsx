@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ReviewsEntry extends React.Component {
+class Review extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -27,4 +27,4 @@ class ReviewsEntry extends React.Component {
     );
   }
 }
-export default ReviewsEntry;
+export default Review;

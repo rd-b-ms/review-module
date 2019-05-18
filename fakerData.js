@@ -3,20 +3,18 @@ const faker = require('faker');
 const db = require('./database/index.js');
 
 const listings = () => {
-  for (let i = 1; i < 101; i += 1) {
+  for (let i = 0; i < 101; i += 1) {
     const query = `INSERT INTO listings (listings_id) VALUES ("${i}")`;
     db.connection.query(query, (error) => {
       if (error) {
         console.log('failed to send listing', error);
-      } else {
-        console.log('listings made');
       }
     });
   }
 };
 
 const messages = () => {
-  for (let i = 0; i < 300; i += 1) {
+  for (let i = 0; i < 1000; i += 1) {
     const years = ['2016', '2017', '2018', '2019'];
     const randomMessage = faker.lorem.paragraphs();
     const randomListingId = faker.random.number(100);
@@ -33,8 +31,6 @@ const messages = () => {
     db.connection.query(query, (error) => {
       if (error) {
         console.log('failed to send message', error);
-      } else {
-        console.log('message made');
       }
     });
   }

@@ -10,9 +10,8 @@
   "scripts": {
     "react-dev": "webpack -d --watch",
     "start": "nodemon server/index.js",
-    "schema": "mysql -u root < schema.sql",
     "shell": "mysql -u root",
-    "seed": "node fakerData.js"
+    "seed": "mysql -u root < schema.sql && node fakerData.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
