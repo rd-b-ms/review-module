@@ -10,14 +10,18 @@
   "scripts": {
     "react-dev": "webpack -d --watch",
     "start": "nodemon server/index.js",
-    "seed": "mysql -u root < schema.sql",
-    "shell": "mysql -u root"
+    "schema": "mysql -u root < schema.sql",
+    "shell": "mysql -u root",
+    "fakerData": "node fakerData.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.19.0",
     "enzyme": "^3.9.0",
     "express": "^4.16.4",
+    "faker": "^4.1.0",
     "jest": "^24.8.0",
+    "moment": "^2.24.0",
     "mysql": "^2.17.1",
     "puppeteer": "^1.16.0",
     "react": "^16.8.6",
