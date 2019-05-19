@@ -1,24 +1,31 @@
-/* eslint-disable react/no-unused-state */
 import React from 'react';
 import axios from 'axios';
+import ReviewList from './ReviewList.jsx';
+import ReviewBar from './RatingBar.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentReviews: '',
+      currentReviews: [],
     };
   }
 
   componentDidMount() {
     axios.get('/messages')
-      .then((responce) => {
-        this.setState({ currentReviews: responce.data });
+      .then((response) => {
+        this.setState({ currentReviews: response.data });
       });
   }
 
   render() {
-    return (<div> Hello World </div>);
+    const { currentReviews } = this.state;
+    return (
+      <div>
+        <ReviewBar ratings={currentReviews} />
+        <ReviewList reviews={currentReviews} />
+      </div>
+    );
   }
 }
 
