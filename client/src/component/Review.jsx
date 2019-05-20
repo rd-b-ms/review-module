@@ -6,7 +6,7 @@ const UserProfilePicture = styled.img`
   width: 48px;
   height: 48px;
 `;
-const UsernameStyle = styled.p`
+const UsernameStyle = styled.div`
   font-weight: 600;
   margin-bottom: 0px;
   margin-top: 0px;
@@ -27,7 +27,7 @@ display: inline-flex;
 width: 100%;
 border-spacing: 0px;
 `;
-const TimeStyle = styled.div`
+const TimeStyle = styled.span`
 margin: 0px;
 font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
 font-size: 14px;
@@ -37,18 +37,73 @@ color: #484848;
 `;
 const ReviewContainer = styled.div`
   margin-bottom: 35px;
+  max-width: 696px;
+  margin-left: 70px;
+`;
+const ReadMore = styled.p`
+  color: #008489;
+  display: inline-flex;
+  margin: 0px
 `;
 class Review extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      readMoreClick: false,
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(event, review) {
+    event.preventDefault();
+    review.readMoreClicked = true;
+    this.setState({ readMoreClick: true });
   }
 
   render() {
+    const { readMoreClick } = this.state;
     const { review } = this.props;
     const {
-      profile_pic_url, username, time_made, message 
+      profile_pic_url, username, time_made, firstHalfOfMessage, secondHalfOfMessage, readMoreClicked,
     } = review;
+    if (readMoreClick === true && readMoreClicked === true) {
+      return (
+        <ReviewContainer>
+          <div>
+            <TimeUsernameProfilePicContainer>
+              <UserProfilePicture src={profile_pic_url} alt="" />
+              <TimeAndUsernameContainer>
+                <div>
+                  <UsernameStyle>{username}</UsernameStyle>
+                  <TimeStyle>{time_made}</TimeStyle>
+                </div>
+              </TimeAndUsernameContainer>
+            </TimeUsernameProfilePicContainer>
+          </div>
+          <MessageStyle>{firstHalfOfMessage + secondHalfOfMessage}</MessageStyle>
+        </ReviewContainer>
+      );
+    } if (secondHalfOfMessage.length > 0) {
+      return (
+        <ReviewContainer>
+          <div>
+            <TimeUsernameProfilePicContainer>
+              <UserProfilePicture src={profile_pic_url} alt="" />
+              <TimeAndUsernameContainer>
+                <div>
+                  <UsernameStyle>{username}</UsernameStyle>
+                  <TimeStyle>{time_made}</TimeStyle>
+                </div>
+              </TimeAndUsernameContainer>
+            </TimeUsernameProfilePicContainer>
+          </div>
+          <MessageStyle>
+            {firstHalfOfMessage}
+            <ReadMore onClick={event => this.handleClick(event, review)}>...Read More</ReadMore>
+          </MessageStyle>
+        </ReviewContainer>
+      );
+    }
     return (
       <ReviewContainer>
         <div>
@@ -62,7 +117,7 @@ class Review extends React.Component {
             </TimeAndUsernameContainer>
           </TimeUsernameProfilePicContainer>
         </div>
-        <MessageStyle>{message}</MessageStyle>
+        <MessageStyle>{firstHalfOfMessage}</MessageStyle>
       </ReviewContainer>
     );
   }
