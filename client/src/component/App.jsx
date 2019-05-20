@@ -14,8 +14,6 @@ class App extends React.Component {
   componentDidMount() {
     axios.get('/messages')
       .then((response) => {
-        console.log(response.data[1].message);
-        console.log(response.data[1].message.length);
         this.setState({ currentReviews: response.data });
       });
   }
