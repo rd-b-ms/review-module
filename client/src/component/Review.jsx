@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const UserProfilePicture = styled.img`
+const StyledUserProfilePicture = styled.img`
   border-radius: 50%;
   width: 48px;
   height: 48px;
 `;
-const UsernameStyle = styled.div`
+const StyledUsername = styled.div`
   font-weight: 600;
   margin-bottom: 0px;
   margin-top: 0px;
@@ -15,19 +15,19 @@ const UsernameStyle = styled.div`
   line-height: 1.375em;
   color: #484848;
 `;
-const MessageStyle = styled.div`
+const StyledMessage = styled.div`
   color: #484848;
   margin-top: 16px;
 `;
-const TimeAndUsernameContainer = styled.div`
+const StyledTimeAndUsernameContainer = styled.div`
   margin-left: 16px;
 `;
-const TimeUsernameProfilePicContainer = styled.div`
+const StyledTimeUsernameProfilePicContainer = styled.div`
 display: inline-flex;
 width: 100%;
 border-spacing: 0px;
 `;
-const TimeStyle = styled.span`
+const StyledTime = styled.span`
 margin: 0px;
 font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
 font-size: 14px;
@@ -35,12 +35,12 @@ font-weight: 400;
 line-height: 1.2857142857142858em;
 color: #484848;
 `;
-const ReviewContainer = styled.div`
+const StyledReviewContainer = styled.div`
   margin-bottom: 35px;
   max-width: 696px;
   margin-left: 70px;
 `;
-const ReadMore = styled.p`
+const StyledReadMore = styled.p`
   color: #008489;
   display: inline-flex;
   margin: 0px
@@ -49,7 +49,7 @@ class Review extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      readMoreClick: false,
+      reviewsHaveBeenClicked: false,
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -57,68 +57,68 @@ class Review extends React.Component {
   handleClick(event, review) {
     event.preventDefault();
     review.readMoreClicked = true;
-    this.setState({ readMoreClick: true });
+    this.setState({ reviewsHaveBeenClicked: true });
   }
 
   render() {
-    const { readMoreClick } = this.state;
+    const { reviewsHaveBeenClicked } = this.state;
     const { review } = this.props;
     const {
-      profile_pic_url, username, time_made, firstHalfOfMessage, secondHalfOfMessage, readMoreClicked,
+      profile_pic_url, username, time_made, firstHalfOfMessage, secondHalfOfMessage, reviewClicked,
     } = review;
-    if (readMoreClick === true && readMoreClicked === true) {
+    if (reviewsHaveBeenClicked === true && reviewClicked === true) {
       return (
-        <ReviewContainer>
+        <StyledReviewContainer>
           <div>
-            <TimeUsernameProfilePicContainer>
-              <UserProfilePicture src={profile_pic_url} alt="" />
-              <TimeAndUsernameContainer>
+            <StyledTimeUsernameProfilePicContainer>
+              <StyledUserProfilePicture src={profile_pic_url} alt="" />
+              <StyledTimeAndUsernameContainer>
                 <div>
-                  <UsernameStyle>{username}</UsernameStyle>
-                  <TimeStyle>{time_made}</TimeStyle>
+                  <StyledUsername>{username}</StyledUsername>
+                  <StyledTime>{time_made}</StyledTime>
                 </div>
-              </TimeAndUsernameContainer>
-            </TimeUsernameProfilePicContainer>
+              </StyledTimeAndUsernameContainer>
+            </StyledTimeUsernameProfilePicContainer>
           </div>
-          <MessageStyle>{firstHalfOfMessage + secondHalfOfMessage}</MessageStyle>
-        </ReviewContainer>
+          <StyledMessage>{firstHalfOfMessage + secondHalfOfMessage}</StyledMessage>
+        </StyledReviewContainer>
       );
     } if (secondHalfOfMessage.length > 0) {
       return (
-        <ReviewContainer>
+        <StyledReviewContainer>
           <div>
-            <TimeUsernameProfilePicContainer>
-              <UserProfilePicture src={profile_pic_url} alt="" />
-              <TimeAndUsernameContainer>
+            <StyledTimeUsernameProfilePicContainer>
+              <StyledUserProfilePicture src={profile_pic_url} alt="" />
+              <StyledTimeAndUsernameContainer>
                 <div>
-                  <UsernameStyle>{username}</UsernameStyle>
-                  <TimeStyle>{time_made}</TimeStyle>
+                  <StyledUsername>{username}</StyledUsername>
+                  <StyledTime>{time_made}</StyledTime>
                 </div>
-              </TimeAndUsernameContainer>
-            </TimeUsernameProfilePicContainer>
+              </StyledTimeAndUsernameContainer>
+            </StyledTimeUsernameProfilePicContainer>
           </div>
-          <MessageStyle>
+          <StyledMessage>
             {firstHalfOfMessage}
-            <ReadMore onClick={event => this.handleClick(event, review)}>...Read More</ReadMore>
-          </MessageStyle>
-        </ReviewContainer>
+            <StyledReadMore onClick={event => this.handleClick(event, review)}>...Read More</StyledReadMore>
+          </StyledMessage>
+        </StyledReviewContainer>
       );
     }
     return (
-      <ReviewContainer>
+      <StyledReviewContainer>
         <div>
-          <TimeUsernameProfilePicContainer>
-            <UserProfilePicture src={profile_pic_url} alt="" />
-            <TimeAndUsernameContainer>
+          <StyledTimeUsernameProfilePicContainer>
+            <StyledUserProfilePicture src={profile_pic_url} alt="" />
+            <StyledTimeAndUsernameContainer>
               <div>
-                <UsernameStyle>{username}</UsernameStyle>
-                <TimeStyle>{time_made}</TimeStyle>
+                <StyledUsername>{username}</StyledUsername>
+                <StyledTime>{time_made}</StyledTime>
               </div>
-            </TimeAndUsernameContainer>
-          </TimeUsernameProfilePicContainer>
+            </StyledTimeAndUsernameContainer>
+          </StyledTimeUsernameProfilePicContainer>
         </div>
-        <MessageStyle>{firstHalfOfMessage}</MessageStyle>
-      </ReviewContainer>
+        <StyledMessage>{firstHalfOfMessage}</StyledMessage>
+      </StyledReviewContainer>
     );
   }
 }

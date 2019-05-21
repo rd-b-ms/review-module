@@ -18,7 +18,7 @@ class ReviewList extends React.Component {
           const secondHalfOfMessage = splitMessage.slice(600, splitMessage.length);
           review.firstHalfOfMessage = firstHalfOfMessage.join('');
           review.secondHalfOfMessage = secondHalfOfMessage.join('');
-          review.readMoreClicked = false;
+          review.reviewClicked = false;
           return (<Review review={review} key={review.message_id} />);
         })}
       </div>
