@@ -21,6 +21,7 @@ class Search extends React.Component {
 
   render() {
     const { searchResult } = this.state;
+    const { ratings } = this.props;
     return (
       <div>
         <form onSubmit={this.handleSubmit}>

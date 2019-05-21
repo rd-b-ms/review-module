@@ -80,7 +80,7 @@ class ReviewBar extends React.Component {
               {`${ratings.length} Reviews`}
             </StyledTotalReviews>
             <StyledSearchBar>
-              <Search />
+              <Search ratings={ratings} />
             </StyledSearchBar>
           </StyledTotalReviewsAndSearch>
         </div>
