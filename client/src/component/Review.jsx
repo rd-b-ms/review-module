@@ -19,12 +19,27 @@ class Review extends React.Component {
 
   render() {
     const {
-      UserProfilePicture, Username, Time, ReviewContainer, ReadMore, TimeUsernameProfilePicContainer, TimeAndUsernameContainer, Message } = styles;
+      UserProfilePicture,
+      Username,
+      Time,
+      ReviewContainer,
+      ReadMore,
+      TimeUsernameProfilePicContainer,
+      TimeAndUsernameContainer,
+      Message,
+    } = styles;
+    
     const { reviewsHaveBeenClicked } = this.state;
     const { review } = this.props;
     const {
-      profile_pic_url, username, time_made, firstHalfOfMessage, secondHalfOfMessage, reviewClicked,
+      profile_pic_url, 
+      username,
+      time_made,
+      message,
+      reviewClicked,
     } = review;
+    const testMessage = message.slice(0, 600);
+    console.log(testMessage);
     if (reviewsHaveBeenClicked && reviewClicked) {
       return (
         <ReviewContainer>
@@ -39,10 +54,10 @@ class Review extends React.Component {
               </TimeAndUsernameContainer>
             </TimeUsernameProfilePicContainer>
           </div>
-          <Message>{firstHalfOfMessage + secondHalfOfMessage}</Message>
+          <Message>{message}</Message>
         </ReviewContainer>
       );
-    } if (secondHalfOfMessage.length > 0) {
+    } if (message.length > 600) {
       return (
         <ReviewContainer>
           <div>
@@ -57,7 +72,7 @@ class Review extends React.Component {
             </TimeUsernameProfilePicContainer>
           </div>
           <Message>
-            {firstHalfOfMessage}
+            {testMessage}
             <ReadMore onClick={event => this.handleClick(event, review)}>...Read More</ReadMore>
           </Message>
         </ReviewContainer>
@@ -76,7 +91,7 @@ class Review extends React.Component {
             </TimeAndUsernameContainer>
           </TimeUsernameProfilePicContainer>
         </div>
-        <Message>{firstHalfOfMessage}</Message>
+        <Message>{testMessage}</Message>
       </ReviewContainer>
     );
   }
