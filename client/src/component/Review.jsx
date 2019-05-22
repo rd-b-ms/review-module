@@ -1,29 +1,98 @@
 import React from 'react';
+import styles from '../componentsStyles/ReviewStyle.jsx';
+
 
 class Review extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      reviewsHaveBeenClicked: false,
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(event, review) {
+    event.preventDefault();
+    review.reviewClicked = true;
+    this.setState({ reviewsHaveBeenClicked: true });
   }
 
   render() {
+    const {
+      UserProfilePicture,
+      Username,
+      Time,
+      ReviewContainer,
+      ReadMore,
+      TimeUsernameProfilePicContainer,
+      TimeAndUsernameContainer,
+      Message,
+    } = styles;
+    
+    const { reviewsHaveBeenClicked } = this.state;
     const { review } = this.props;
     const {
-      profile_pic_url, username, time_made, message 
+      profile_pic_url, 
+      username,
+      time_made,
+      message,
+      reviewClicked,
     } = review;
-    return (
-      <div>
-        <div>
+    const testMessage = message.slice(0, 600);
+    console.log(testMessage);
+    if (reviewsHaveBeenClicked && reviewClicked) {
+      return (
+        <ReviewContainer>
           <div>
-            <div><img src={profile_pic_url} alt="" /></div>
-            <div>{username}</div>
-            <div>{time_made}</div>
+            <TimeUsernameProfilePicContainer>
+              <UserProfilePicture src={profile_pic_url} alt="" />
+              <TimeAndUsernameContainer>
+                <div>
+                  <Username>{username}</Username>
+                  <Time>{time_made}</Time>
+                </div>
+              </TimeAndUsernameContainer>
+            </TimeUsernameProfilePicContainer>
           </div>
+          <Message>{message}</Message>
+        </ReviewContainer>
+      );
+    } if (message.length > 600) {
+      return (
+        <ReviewContainer>
+          <div>
+            <TimeUsernameProfilePicContainer>
+              <UserProfilePicture src={profile_pic_url} alt="" />
+              <TimeAndUsernameContainer>
+                <div>
+                  <Username>{username}</Username>
+                  <Time>{time_made}</Time>
+                </div>
+              </TimeAndUsernameContainer>
+            </TimeUsernameProfilePicContainer>
+          </div>
+          <Message>
+            {testMessage}
+            <ReadMore onClick={event => this.handleClick(event, review)}>...Read More</ReadMore>
+          </Message>
+        </ReviewContainer>
+      );
+    }
+    return (
+      <ReviewContainer>
+        <div>
+          <TimeUsernameProfilePicContainer>
+            <UserProfilePicture src={profile_pic_url} alt="" />
+            <TimeAndUsernameContainer>
+              <div>
+                <Username>{username}</Username>
+                <Time>{time_made}</Time>
+              </div>
+            </TimeAndUsernameContainer>
+          </TimeUsernameProfilePicContainer>
         </div>
-        <h5>
-          {message}
-        </h5>
-      </div>
+        <Message>{testMessage}</Message>
+      </ReviewContainer>
     );
   }
 }

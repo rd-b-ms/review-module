@@ -11,7 +11,11 @@ class ReviewList extends React.Component {
     const { reviews } = this.props;
     return (
       <div>
-        {reviews.map(review => <Review review={review} key={review.message_id} />)}
+        {reviews.map((review) => {
+          // This will split the message in two
+          review.reviewClicked = false;
+          return (<Review review={review} key={review.message_id} />);
+        })}
       </div>
     );
   }
