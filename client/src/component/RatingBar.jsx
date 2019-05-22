@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Search from './Search.jsx';
+import StarRating from './StarRating.jsx';
 
 const StyledTotalReviewsAndSearch = styled.h2`
   display: inline-flex;
@@ -10,11 +11,13 @@ const StyledSearchBar = styled.div`
   padding-left: 8px;
 `;
 const StyledTotalReviews = styled.div`
-display: table;
-position: relative;
-height: 100%;
-width: 100%;
-padding-right: 8px;
+font-size: 24px !important;
+font-weight: 800 !important;
+line-height: 1.25em !important;
+color: #484848 !important;
+padding-top: 2px !important;
+padding-bottom: 2px !important;
+font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
 `;
 const StyledRatingsBox1 = styled.div`
 color: #484848;
@@ -35,6 +38,7 @@ const StyledRating = styled.div`
   font-weight: 400;
   line-height: 1.375em;
   color: #484848;
+  display: -webkit-box;
 `;
 const StyledRatingsBox2 = styled.div`
   color: #484848;
@@ -48,6 +52,14 @@ const StyledRatingsBox2 = styled.div`
   padding-right: 8px;
   width: 332px;
 `;
+const StyledRatingNameAndStars = styled.div`
+  padding-left: 8px;
+  padding-right: 8px;
+  min-height: 1px;
+  position: relative;
+  width: 50%;
+  // float: left;
+`;
 class ReviewBar extends React.Component {
   constructor(props) {
     super(props);
@@ -56,6 +68,7 @@ class ReviewBar extends React.Component {
 
   render() {
     const { ratings } = this.props;
+    let total = 0;
     const totalRatings = {
       accuracy: 0,
       communication: 0,
@@ -72,12 +85,16 @@ class ReviewBar extends React.Component {
       totalRatings.check_in += ratings[i].check_in_rating;
       totalRatings.value += ratings[i].value_rating;
     }
+    for (let i = 0; i < Object.values(totalRatings).length; i += 1) {
+      total += Object.values(totalRatings)[i];
+    }
     return (
       <div>
         <div>
           <StyledTotalReviewsAndSearch>
             <StyledTotalReviews>
               {`${ratings.length} Reviews`}
+              <StarRating rating={total / Object.keys(totalRatings).length / ratings.length} />
             </StyledTotalReviews>
             <StyledSearchBar>
               <Search ratings={ratings} />
@@ -86,30 +103,55 @@ class ReviewBar extends React.Component {
         </div>
         <StyledRatingsBox1>
           <StyledRating>
-            Accuracy
-            {` ${Math.floor((totalRatings.accuracy / ratings.length))}`}
+            <StyledRatingNameAndStars>
+              Accuracy
+            </StyledRatingNameAndStars>
+            <StyledRatingNameAndStars>
+              <StarRating rating={totalRatings.accuracy / ratings.length} />
+            </StyledRatingNameAndStars>
           </StyledRating>
           <StyledRating>
-            Communication
-            {` ${Math.floor((totalRatings.communication / ratings.length))}`}
+            <StyledRatingNameAndStars>
+              Communication
+            </StyledRatingNameAndStars>
+            <StyledRatingNameAndStars>
+              <StarRating rating={totalRatings.communication / ratings.length} />
+            </StyledRatingNameAndStars>
           </StyledRating>
           <StyledRating>
-            Cleanliness
-            {` ${Math.floor((totalRatings.cleanliness / ratings.length))}`}
+            <StyledRatingNameAndStars>
+              Cleanliness
+            </StyledRatingNameAndStars>
+            <StyledRatingNameAndStars>
+              <StarRating rating={totalRatings.cleanliness / ratings.length} />
+            </StyledRatingNameAndStars>
           </StyledRating>
         </StyledRatingsBox1>
+
         <StyledRatingsBox2>
           <StyledRating>
-            Location
-            {` ${Math.floor((totalRatings.location / ratings.length))}`}
+            <StyledRatingNameAndStars>
+              Location
+            </StyledRatingNameAndStars>
+            <StyledRatingNameAndStars>
+              <StarRating rating={totalRatings.location / ratings.length} />
+            </StyledRatingNameAndStars>
           </StyledRating>
           <StyledRating>
-            Check-in
-            {` ${Math.floor((totalRatings.check_in / ratings.length))}`}
+            <StyledRatingNameAndStars>
+              Check-in
+            </StyledRatingNameAndStars>
+            <StyledRatingNameAndStars>
+              <StarRating rating={totalRatings.check_in / ratings.length} />
+            </StyledRatingNameAndStars>
           </StyledRating>
           <StyledRating>
-            Value
-            {` ${Math.floor((totalRatings.value / ratings.length))}`}
+            <StyledRatingNameAndStars>
+              Value
+            </StyledRatingNameAndStars>
+            <StyledRatingNameAndStars>
+              <StarRating rating={totalRatings.value / ratings.length} />
+            </StyledRatingNameAndStars>
           </StyledRating>
         </StyledRatingsBox2>
       </div>
