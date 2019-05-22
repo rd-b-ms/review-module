@@ -32,19 +32,11 @@ class Review extends React.Component {
     const { reviewsHaveBeenClicked } = this.state;
     const { review } = this.props;
     const {
-<<<<<<< HEAD
-<<<<<<< HEAD
       profile_pic_url, 
       username,
       time_made,
       message,
       reviewClicked,
-=======
-       profile_pic_url, username, time_made, message 
->>>>>>> Added my bundle.js to my git ignore
-=======
-      profile_pic_url, username, time_made, message 
->>>>>>> conflicts
     } = review;
     const testMessage = message.slice(0, 600);
     console.log(testMessage);
