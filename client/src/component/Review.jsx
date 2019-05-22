@@ -9,7 +9,7 @@ class Review extends React.Component {
   render() {
     const { review } = this.props;
     const {
-      profile_pic_url, username, time_made, message 
+       profile_pic_url, username, time_made, message 
     } = review;
     return (
       <div>
