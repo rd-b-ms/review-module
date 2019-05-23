@@ -11,8 +11,7 @@ class Review extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(event, review) {
-    event.preventDefault();
+  handleClick(review) {
     review.reviewClicked = true;
     this.setState({ reviewsHaveBeenClicked: true });
   }
@@ -28,18 +27,16 @@ class Review extends React.Component {
       TimeAndUsernameContainer,
       Message,
     } = styles;
-    
     const { reviewsHaveBeenClicked } = this.state;
     const { review } = this.props;
     const {
-      profile_pic_url, 
+      profile_pic_url,
       username,
       time_made,
       message,
       reviewClicked,
     } = review;
     const testMessage = message.slice(0, 600);
-    console.log(testMessage);
     if (reviewsHaveBeenClicked && reviewClicked) {
       return (
         <ReviewContainer>
@@ -73,7 +70,7 @@ class Review extends React.Component {
           </div>
           <Message>
             {testMessage}
-            <ReadMore onClick={event => this.handleClick(event, review)}>...Read More</ReadMore>
+            <ReadMore onClick={() => this.handleClick(review)}>...Read More</ReadMore>
           </Message>
         </ReviewContainer>
       );
