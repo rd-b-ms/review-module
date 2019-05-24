@@ -14,7 +14,7 @@ const listings = () => {
 };
 
 const messages = () => {
-  for (let i = 0; i < 1000; i += 1) {
+  for (let i = 0; i < 10000; i += 1) {
     const years = ['2016', '2017', '2018', '2019'];
     const randomMessage = faker.lorem.paragraphs();
     const randomListingId = faker.random.number(100);
