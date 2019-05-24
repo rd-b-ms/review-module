@@ -1,6 +1,15 @@
 import React from 'react';
 import styles from '../componentsStyles/PagesStyle.jsx';
 
+const {
+  PageButton,
+  ArrowButtons,
+  NumberInButton,
+  SelectedButton,
+  SelectDiv,
+  PageButtonList,
+  PageButtonUL,
+} = styles;
 
 class Pages extends React.Component {
   constructor(props) {
@@ -16,15 +25,7 @@ class Pages extends React.Component {
       forwardArrowClicked,
       currentPage,
     } = this.props;
-    const {
-      PageButton,
-      ArrowButtons,
-      NumberInButton,
-      SelectedButton,
-      SelectDiv,
-      PageButtonList,
-      PageButtonUL,
-    } = styles;
+
     const pageArray = [];
     const selectedPageButton = (
       <SelectedButton>
@@ -71,7 +72,7 @@ class Pages extends React.Component {
     for (let i = 1; i <= pageNumbers; i += 1) {
       pageArray.push(
         <PageButtonList>
-          <PageButton type="button" onClick={event => handlePageClick(event, i - 1)}>
+          <PageButton type="button" onClick={() => handlePageClick(i - 1)}>
             <NumberInButton>{i}</NumberInButton>
           </PageButton>
         </PageButtonList>,
@@ -81,7 +82,7 @@ class Pages extends React.Component {
       return (
         <PageButtonUL>
           <PageButtonList>
-            <PageButton type="button" onClick={event => backArrowClicked(event)}>
+            <PageButton type="button" onClick={backArrowClicked}>
               {forwardArrow}
             </PageButton>
           </PageButtonList>
@@ -90,7 +91,7 @@ class Pages extends React.Component {
           {pageArray[2]}
           {pageArray[3]}
           <PageButtonList>
-            <PageButton type="button" onClick={event => forwardArrowClicked(event)}>
+            <PageButton type="button" onClick={forwardArrowClicked}>
               {backArrow}
             </PageButton>
           </PageButtonList>
@@ -106,7 +107,7 @@ class Pages extends React.Component {
           {'...'}
           {pageArray[pageArray.length - 1]}
           <PageButtonList>
-            <PageButton type="button" onClick={event => forwardArrowClicked(event)}>
+            <PageButton type="button" onClick={forwardArrowClicked}>
               {backArrow}
             </PageButton>
           </PageButtonList>
@@ -117,7 +118,7 @@ class Pages extends React.Component {
       return (
         <PageButtonUL>
           <PageButtonList>
-            <PageButton type="button" onClick={event => backArrowClicked(event)}>
+            <PageButton type="button" onClick={backArrowClicked}>
               {forwardArrow}
             </PageButton>
           </PageButtonList>
@@ -127,7 +128,7 @@ class Pages extends React.Component {
           {'...'}
           {pageArray[pageArray.length - 1]}
           <PageButtonList>
-            <PageButton type="button" onClick={event => forwardArrowClicked(event)}>
+            <PageButton type="button" onClick={forwardArrowClicked}>
               {backArrow}
             </PageButton>
           </PageButtonList>
@@ -138,7 +139,7 @@ class Pages extends React.Component {
       return (
         <PageButtonUL>
           <PageButtonList>
-            <PageButton type="button" onClick={event => backArrowClicked(event)}>
+            <PageButton type="button" onClick={backArrowClicked}>
               {forwardArrow}
             </PageButton>
           </PageButtonList>
@@ -149,7 +150,7 @@ class Pages extends React.Component {
           {'...'}
           {pageArray[pageArray.length - 1]}
           <PageButtonList>
-            <PageButton type="button" onClick={event => forwardArrowClicked(event)}>
+            <PageButton type="button" onClick={forwardArrowClicked}>
               {backArrow}
             </PageButton>
           </PageButtonList>
@@ -160,7 +161,7 @@ class Pages extends React.Component {
       return (
         <PageButtonUL>
           <PageButtonList>
-            <PageButton type="button" onClick={event => backArrowClicked(event)}>
+            <PageButton type="button" onClick={backArrowClicked}>
               {forwardArrow}
             </PageButton>
           </PageButtonList>
@@ -172,7 +173,7 @@ class Pages extends React.Component {
           {'...'}
           {pageArray[pageArray.length - 1]}
           <PageButtonList>
-            <PageButton type="button" onClick={event => forwardArrowClicked(event)}>
+            <PageButton type="button" onClick={forwardArrowClicked}>
               {backArrow}
             </PageButton>
           </PageButtonList>
@@ -183,7 +184,7 @@ class Pages extends React.Component {
       return (
         <PageButtonUL>
           <PageButtonList>
-            <PageButton type="button" onClick={event => backArrowClicked(event)}>
+            <PageButton type="button" onClick={backArrowClicked}>
               {forwardArrow}
             </PageButton>
           </PageButtonList>
@@ -197,7 +198,7 @@ class Pages extends React.Component {
       return (
         <PageButtonUL>
           <PageButtonList>
-            <PageButton type="button" onClick={event => backArrowClicked(event)}>
+            <PageButton type="button" onClick={backArrowClicked}>
               {forwardArrow}
             </PageButton>
           </PageButtonList>
@@ -207,7 +208,7 @@ class Pages extends React.Component {
           {selectedPageButton}
           {pageArray[pageArray.length - 1]}
           <PageButtonList>
-            <PageButton type="button" onClick={event => forwardArrowClicked(event)}>
+            <PageButton type="button" onClick={forwardArrowClicked}>
               {backArrow}
             </PageButton>
           </PageButtonList>
@@ -218,7 +219,7 @@ class Pages extends React.Component {
       return (
         <PageButtonUL>
           <PageButtonList>
-            <PageButton type="button" onClick={event => backArrowClicked(event)}>
+            <PageButton type="button" onClick={backArrowClicked}>
               {forwardArrow}
             </PageButton>
           </PageButtonList>
@@ -229,7 +230,7 @@ class Pages extends React.Component {
           {pageArray[pageArray.length - 2]}
           {pageArray[pageArray.length - 1]}
           <PageButtonList>
-            <PageButton type="button" onClick={event => forwardArrowClicked(event)}>
+            <PageButton type="button" onClick={forwardArrowClicked}>
               {backArrow}
             </PageButton>
           </PageButtonList>
@@ -239,7 +240,7 @@ class Pages extends React.Component {
     return (
       <PageButtonUL>
         <PageButtonList>
-          <PageButton type="button" onClick={event => backArrowClicked(event)}>
+          <PageButton type="button" onClick={backArrowClicked}>
             {forwardArrow}
           </PageButton>
         </PageButtonList>
@@ -251,7 +252,7 @@ class Pages extends React.Component {
         {'...'}
         {pageArray[pageArray.length - 1]}
         <PageButtonList>
-          <PageButton type="button" onClick={event => forwardArrowClicked(event)}>
+          <PageButton type="button" onClick={forwardArrowClicked}>
             {backArrow}
           </PageButton>
         </PageButtonList>

@@ -41,8 +41,7 @@ class App extends React.Component {
       });
   }
 
-  backArrowClicked(event) {
-    event.preventDefault();
+  backArrowClicked() {
     const { splitReviews, currentPage } = this.state;
     if (splitReviews[currentPage - 1] !== undefined) {
       this.setState({
@@ -52,8 +51,7 @@ class App extends React.Component {
     }
   }
 
-  forwardArrowClicked(event) {
-    event.preventDefault();
+  forwardArrowClicked() {
     const { splitReviews, currentPage } = this.state;
     if (splitReviews[currentPage + 1] !== undefined) {
       this.setState({
@@ -63,8 +61,7 @@ class App extends React.Component {
     }
   }
 
-  handlePageClick(event, page) {
-    event.preventDefault();
+  handlePageClick(page) {
     const { splitReviews } = this.state;
     this.setState({
       currentReviews: splitReviews[page],

@@ -4,12 +4,8 @@ const PageButton = styled.button`
   display: inline-block;
   background-color: transparent;
   color: rgb(0, 132, 137);
-  border-width: initial;
   border-style: none;
-  border-color: initial;
-  border-image: initial;
-  font: inherit inherit inherit inherit inherit inherit inherit inherit inherit;
-  text-decoration: none;
+ 
 `;
 
 const ArrowButtons = styled.div`
@@ -37,12 +33,7 @@ const SelectedButton = styled.button`
   display: inline-block;
   background-color: transparent;
   color: rgb(255, 255, 255);
-  border-width: initial;
   border-style: none;
-  border-color: initial;
-  border-image: initial;
-  font: inherit inherit inherit inherit inherit inherit inherit inherit inherit;
-  text-decoration: none;
 `;
 
 const SelectDiv = styled.div`
