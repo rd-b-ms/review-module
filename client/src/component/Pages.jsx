@@ -1,15 +1,6 @@
 import React from 'react';
-import styles from '../componentsStyles/PagesStyle.jsx';
+import { PageButton, ArrowButtons, NumberInButton, SelectedButton, SelectDiv, PageButtonList, PageButtonUL} from '../componentsStyles/PagesStyle.jsx';
 
-const {
-  PageButton,
-  ArrowButtons,
-  NumberInButton,
-  SelectedButton,
-  SelectDiv,
-  PageButtonList,
-  PageButtonUL,
-} = styles;
 
 class Pages extends React.Component {
   constructor(props) {

@@ -59,7 +59,7 @@ const PageButtonUL = styled.ul`
   margin-left: 10px;
 `;
 
-const styles = {
+export {
   PageButton,
   ArrowButtons,
   NumberInButton,
@@ -68,4 +68,3 @@ const styles = {
   PageButtonList,
   PageButtonUL,
 };
-export default styles;
