@@ -111,7 +111,6 @@ class Pages extends React.Component {
       );
     }
     if (pageArray.length <= 4 && currentPage === 2) {
-      console.log('page 3');
       return (
         <PageButtonUL>
           <PageButtonList>
