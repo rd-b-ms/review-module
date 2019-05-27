@@ -75,7 +75,7 @@ class Pages extends React.Component {
         </PageButtonList>,
       );
     }
-    if (pageArray.length < 3) {
+    if (pageArray.length <= 4) {
       return (
         <PageButtonUL>
           <PageButtonList>
