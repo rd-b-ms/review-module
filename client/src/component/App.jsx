@@ -95,7 +95,7 @@ class App extends React.Component {
         searchSplitReviews: searchPages,
         currentReviews: searchPages[0],
         searchWord: word,
-        allSearchReviews: searchReviews.length,
+        allSearchReviews: searchReviews.length - 1,
       });
     } else {
       this.setState({
@@ -106,9 +106,15 @@ class App extends React.Component {
     }
   }
 
-  backArrowClicked() {
-    const { splitReviews, currentPage } = this.state;
-    if (splitReviews[currentPage - 1] !== undefined) {
+  backArrowClicked(search) {
+    const { splitReviews, currentPage, searchSplitReviews } = this.state;
+    if (search && searchSplitReviews[currentPage - 1] !== undefined) {
+      this.setState({
+        currentReviews: searchSplitReviews[currentPage - 1],
+        currentPage: currentPage - 1,
+      });
+    }
+    if (splitReviews[currentPage - 1] !== undefined && !search) {
       this.setState({
         currentReviews: splitReviews[currentPage - 1],
         currentPage: currentPage - 1,
@@ -116,9 +122,16 @@ class App extends React.Component {
     }
   }
 
-  forwardArrowClicked() {
-    const { splitReviews, currentPage } = this.state;
-    if (splitReviews[currentPage + 1] !== undefined) {
+  forwardArrowClicked(search) {
+    console.log(search);
+    const { splitReviews, currentPage, searchSplitReviews } = this.state;
+    if (search && searchSplitReviews[currentPage + 1] !== undefined) {
+      this.setState({
+        currentReviews: searchSplitReviews[currentPage + 1],
+        currentPage: currentPage + 1,
+      });
+    }
+    if (splitReviews[currentPage + 1] !== undefined && !search) {
       this.setState({
         currentReviews: splitReviews[currentPage + 1],
         currentPage: currentPage + 1,
@@ -126,12 +139,20 @@ class App extends React.Component {
     }
   }
 
-  handlePageClick(page) {
-    const { splitReviews } = this.state;
-    this.setState({
-      currentReviews: splitReviews[page],
-      currentPage: page,
-    });
+  handlePageClick(page, search) {
+    const { splitReviews, searchSplitReviews } = this.state;
+    if (search) {
+      this.setState({
+        currentReviews: searchSplitReviews[page],
+        currentPage: page,
+      });
+    }
+    if (!search) {
+      this.setState({
+        currentReviews: splitReviews[page],
+        currentPage: page,
+      });
+    }
   }
 
   render() {
