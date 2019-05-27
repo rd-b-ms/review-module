@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../componentsStyles/RatingBarStyles.jsx';
+import { TotalReviewsAndSearch, SearchBar, TotalReviews, RatingsBox1, Rating, RatingsBox2, RatingNameAndStars, RatingBar, BackToReviewsStyle, SearchMessageStyle, SearchMessageContainerStyle } from '../componentsStyles/RatingBarStyles.jsx';
 import Search from './Search.jsx';
 import StarRating from './StarRating.jsx';
 
@@ -10,16 +10,7 @@ class ReviewBar extends React.Component {
   }
 
   render() {
-    const {
-      StyledTotalReviewsAndSearch,
-      StyledSearchBar,
-      StyledTotalReviews,
-      StyledRatingsBox1,
-      StyledRating,
-      StyledRatingsBox2,
-      StyledRatingNameAndStars,
-    } = styles;
-    const { ratings } = this.props;
+    const { ratings, search, handleSearch, searchWord, backToReviews, allSearchReviews, searchWordNotFound } = this.props;
     let total = 0;
     const totalRatings = {
       accuracy: 0,
@@ -40,74 +31,125 @@ class ReviewBar extends React.Component {
     for (let i = 0; i < Object.values(totalRatings).length; i += 1) {
       total += Object.values(totalRatings)[i];
     }
+    if (searchWordNotFound) {
+      return (
+        <RatingBar>
+          <div>
+            <TotalReviewsAndSearch>
+              <TotalReviews>
+                {`${ratings.length} Reviews`}
+                <StarRating rating={total / Object.keys(totalRatings).length / ratings.length} />
+              </TotalReviews>
+              <SearchBar>
+                <Search ratings={ratings} handleSearch={handleSearch} />
+              </SearchBar>
+            </TotalReviewsAndSearch>
+          </div>
+          <SearchMessageContainerStyle>
+            <SearchMessageStyle>
+              {`None of our guests have mentioned "${searchWord}"`}
+            </SearchMessageStyle>
+            <BackToReviewsStyle type="button" onClick={backToReviews}>
+              Back to all reviews
+            </BackToReviewsStyle>
+          </SearchMessageContainerStyle>
+        </RatingBar>
+      );
+    }
+    if (search) {
+      return (
+        <RatingBar>
+          <div>
+            <TotalReviewsAndSearch>
+              <TotalReviews>
+                {`${ratings.length} Reviews`}
+                <StarRating rating={total / Object.keys(totalRatings).length / ratings.length} />
+              </TotalReviews>
+              <SearchBar>
+                <Search ratings={ratings} handleSearch={handleSearch} />
+              </SearchBar>
+            </TotalReviewsAndSearch>
+          </div>
+          <SearchMessageContainerStyle>
+            <SearchMessageStyle>
+              {`${allSearchReviews} guests have mentioned "${searchWord}"`}
+            </SearchMessageStyle>
+            <BackToReviewsStyle type="button" onClick={backToReviews}>
+              Back to all reviews
+            </BackToReviewsStyle>
+          </SearchMessageContainerStyle>
+        </RatingBar>
+      );
+    }
     return (
-      <div>
+      <RatingBar>
         <div>
-          <StyledTotalReviewsAndSearch>
-            <StyledTotalReviews>
+          <TotalReviewsAndSearch>
+            <TotalReviews>
               {`${ratings.length} Reviews`}
               <StarRating rating={total / Object.keys(totalRatings).length / ratings.length} />
-            </StyledTotalReviews>
-            <StyledSearchBar>
-              <Search ratings={ratings} />
-            </StyledSearchBar>
-          </StyledTotalReviewsAndSearch>
+            </TotalReviews>
+            <SearchBar>
+              <Search ratings={ratings} handleSearch={handleSearch} />
+            </SearchBar>
+          </TotalReviewsAndSearch>
         </div>
-        <StyledRatingsBox1>
-          <StyledRating>
-            <StyledRatingNameAndStars>
+        <RatingsBox1>
+          <Rating>
+            <RatingNameAndStars>
               Accuracy
-            </StyledRatingNameAndStars>
-            <StyledRatingNameAndStars>
+            </RatingNameAndStars>
+            <RatingNameAndStars>
               <StarRating rating={totalRatings.accuracy / ratings.length} />
-            </StyledRatingNameAndStars>
-          </StyledRating>
-          <StyledRating>
-            <StyledRatingNameAndStars>
+            </RatingNameAndStars>
+          </Rating>
+          <Rating>
+            <RatingNameAndStars>
               Communication
-            </StyledRatingNameAndStars>
-            <StyledRatingNameAndStars>
+            </RatingNameAndStars>
+            <RatingNameAndStars>
               <StarRating rating={totalRatings.communication / ratings.length} />
-            </StyledRatingNameAndStars>
-          </StyledRating>
-          <StyledRating>
-            <StyledRatingNameAndStars>
+            </RatingNameAndStars>
+          </Rating>
+          <Rating>
+            <RatingNameAndStars>
               Cleanliness
-            </StyledRatingNameAndStars>
-            <StyledRatingNameAndStars>
+            </RatingNameAndStars>
+            <RatingNameAndStars>
               <StarRating rating={totalRatings.cleanliness / ratings.length} />
-            </StyledRatingNameAndStars>
-          </StyledRating>
-        </StyledRatingsBox1>
+            </RatingNameAndStars>
+          </Rating>
+        </RatingsBox1>
 
-        <StyledRatingsBox2>
-          <StyledRating>
-            <StyledRatingNameAndStars>
+        <RatingsBox2>
+          <Rating>
+            <RatingNameAndStars>
               Location
-            </StyledRatingNameAndStars>
-            <StyledRatingNameAndStars>
+            </RatingNameAndStars>
+            <RatingNameAndStars>
               <StarRating rating={totalRatings.location / ratings.length} />
-            </StyledRatingNameAndStars>
-          </StyledRating>
-          <StyledRating>
-            <StyledRatingNameAndStars>
+            </RatingNameAndStars>
+          </Rating>
+          <Rating>
+            <RatingNameAndStars>
               Check-in
-            </StyledRatingNameAndStars>
-            <StyledRatingNameAndStars>
+            </RatingNameAndStars>
+            <RatingNameAndStars>
               <StarRating rating={totalRatings.check_in / ratings.length} />
-            </StyledRatingNameAndStars>
-          </StyledRating>
-          <StyledRating>
-            <StyledRatingNameAndStars>
+            </RatingNameAndStars>
+          </Rating>
+          <Rating>
+            <RatingNameAndStars>
               Value
-            </StyledRatingNameAndStars>
-            <StyledRatingNameAndStars>
+            </RatingNameAndStars>
+            <RatingNameAndStars>
               <StarRating rating={totalRatings.value / ratings.length} />
-            </StyledRatingNameAndStars>
-          </StyledRating>
-        </StyledRatingsBox2>
-      </div>
+            </RatingNameAndStars>
+          </Rating>
+        </RatingsBox2>
+      </RatingBar>
     );
   }
 }
+
 export default ReviewBar;

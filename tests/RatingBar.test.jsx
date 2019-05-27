@@ -7,7 +7,7 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('review test', () => {
   test('should render with no error', () => {
-    expect(shallow(<RatingBar ratings={{
+    expect(shallow(<RatingBar ratings={[{
       accuracy_rating: 2,
       check_in_rating: 2,
       cleanliness_rating: 4,
@@ -21,7 +21,7 @@ describe('review test', () => {
       time_made: 'June 2018',
       username: 'Danika Purdy',
       value_rating: 1,
-    }}
+    }]}
     />).exists()).toBe(true);
   });
 });
