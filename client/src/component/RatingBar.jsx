@@ -151,17 +151,5 @@ class ReviewBar extends React.Component {
     );
   }
 }
-// ReviewBar.propTypes = {
-//   ratings: propTypes.array,
-//   search: propTypes.boolean,
-// }
-//   // handleSearch,
-//   // searchWord,
-//   // backToReviews,
-//   // allSearchReviews };
-//   // Person.propTypes = {
-//   //   firstName:PropTypes.string,
-//   //   lastName:PropTypes.string,
-//   //   country:PropTypes.string
-//   // };
+
 export default ReviewBar;

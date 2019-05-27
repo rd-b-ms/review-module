@@ -63,7 +63,7 @@ class Pages extends React.Component {
       </ArrowButtons>
     );
     let numberOfPages = pageNumbers;
-    if (search === true) {
+    if (search) {
       numberOfPages = searchPageNumbers;
     }
     for (let i = 1; i <= numberOfPages; i += 1) {
