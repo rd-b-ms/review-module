@@ -8,12 +8,12 @@ class ReviewList extends React.Component {
   }
 
   render() {
-    const { reviews } = this.props;
+    const { reviews, search } = this.props;
     return (
       <div>
         {reviews.map((review) => {
           review.reviewClicked = false;
-          return (<Review review={review} key={review.message_id} />);
+          return (<Review review={review} key={review.message_id} search={search} />);
         })}
       </div>
     );

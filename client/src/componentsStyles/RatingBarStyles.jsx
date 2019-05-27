@@ -1,22 +1,23 @@
 import styled from 'styled-components';
 
-const StyledTotalReviewsAndSearch = styled.h2`
+const TotalReviewsAndSearch = styled.h2`
 display: inline-flex;
 `;
-const StyledSearchBar = styled.div`
+const SearchBar = styled.div`
 margin-left: 10px;
-padding-left: 8px;
+padding-left: 226px;
+float: right;
 `;
-const StyledTotalReviews = styled.div`
-font-size: 24px !important;
-font-weight: 800 !important;
-line-height: 1.25em !important;
-color: #484848 !important;
-padding-top: 2px !important;
-padding-bottom: 2px !important;
+const TotalReviews = styled.div`
+font-size: 24px;
+font-weight: 800;
+line-height: 1.25em;
+color: #484848;
+padding-top: 2px;
+padding-bottom: 2px;
 font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
 `;
-const StyledRatingsBox1 = styled.div`
+const RatingsBox1 = styled.div`
 color: #484848;
 float: left;
 font-family: Circular, -apple-system, system-ui, Roboto, "Helvetica Neue", sans-serif;
@@ -28,7 +29,7 @@ padding-left: 8px;
 padding-right: 8px;
 width: 332px;
 `;
-const StyledRating = styled.div`
+const Rating = styled.div`
 margin: 0px;
 font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
 font-size: 16px;
@@ -37,7 +38,7 @@ line-height: 1.375em;
 color: #484848;
 display: -webkit-box;
 `;
-const StyledRatingsBox2 = styled.div`
+const RatingsBox2 = styled.div`
 color: #484848;
 float: left;
 font-family: Circular,-apple-system,system-ui,Roboto,"Helvetica Neue",sans-serif;
@@ -49,21 +50,42 @@ padding-left: 8px;
 padding-right: 8px;
 width: 332px;
 `;
-const StyledRatingNameAndStars = styled.div`
+const RatingNameAndStars = styled.div`
 padding-left: 8px;
 padding-right: 8px;
 min-height: 1px;
 position: relative;
 width: 50%;
-// float: left;
 `;
-const styles = {
-  StyledTotalReviewsAndSearch,
-  StyledSearchBar,
-  StyledTotalReviews,
-  StyledRatingsBox1,
-  StyledRating,
-  StyledRatingsBox2,
-  StyledRatingNameAndStars,
+const RatingBar = styled.div`
+  margin-left: 78px;
+`;
+const BackToReviewsStyle = styled.button`
+  color: var(--color-text-link, #008489);
+  backGround: transparent;
+  width: 33.3333%;
+  float: left;
+  outline: none;
+  border: none;
+  font-size: 14px;
+`;
+const SearchMessageStyle = styled.div`
+  width: 400px;
+  float: left;
+`;
+const SearchMessageContainerStyle = styled.div`
+  margin-bottom: 56px;
+`;
+export {
+  TotalReviewsAndSearch,
+  SearchBar,
+  TotalReviews,
+  RatingsBox1,
+  Rating,
+  RatingsBox2,
+  RatingNameAndStars,
+  RatingBar,
+  BackToReviewsStyle,
+  SearchMessageStyle,
+  SearchMessageContainerStyle,
 };
-export default styles;

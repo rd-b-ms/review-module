@@ -39,6 +39,8 @@ const ReviewContainer = styled.div`
   margin-bottom: 35px;
   max-width: 696px;
   margin-left: 70px;
+  border-bottom: solid #ebebeb;
+  border-width: thin;
 `;
 const ReadMore = styled.p`
   color: #008489;

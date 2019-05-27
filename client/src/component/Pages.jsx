@@ -15,6 +15,8 @@ class Pages extends React.Component {
       backArrowClicked,
       forwardArrowClicked,
       currentPage,
+      search,
+      searchPageNumbers,
     } = this.props;
 
     const pageArray = [];
@@ -60,7 +62,11 @@ class Pages extends React.Component {
         </svg>
       </ArrowButtons>
     );
-    for (let i = 1; i <= pageNumbers; i += 1) {
+    let numberOfPages = pageNumbers;
+    if (search === true) {
+      numberOfPages = searchPageNumbers;
+    }
+    for (let i = 1; i <= numberOfPages; i += 1) {
       pageArray.push(
         <PageButtonList>
           <PageButton type="button" onClick={() => handlePageClick(i - 1)}>
@@ -179,6 +185,8 @@ class Pages extends React.Component {
               {forwardArrow}
             </PageButton>
           </PageButtonList>
+          {pageArray[0]}
+          {'...'}
           {pageArray[pageArray.length - 3]}
           {pageArray[pageArray.length - 2]}
           {selectedPageButton}
