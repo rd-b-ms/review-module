@@ -123,7 +123,6 @@ class App extends React.Component {
   }
 
   forwardArrowClicked(search) {
-    console.log(search);
     const { splitReviews, currentPage, searchSplitReviews } = this.state;
     if (search && searchSplitReviews[currentPage + 1] !== undefined) {
       this.setState({
