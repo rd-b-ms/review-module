@@ -4,7 +4,6 @@ const TotalReviewsAndSearch = styled.h2`
 display: inline-flex;
 `;
 const SearchBar = styled.div`
-margin-left: 10px;
 padding-left: 226px;
 float: right;
 `;
