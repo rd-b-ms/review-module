@@ -59,6 +59,9 @@ width: 50%;
 `;
 const RatingBar = styled.div`
   margin-left: 78px;
+  border-bottom: solid #ebebeb;
+  border-width: thin;
+  max-width: 696px;
 `;
 const BackToReviewsStyle = styled.button`
   color: var(--color-text-link, #008489);
