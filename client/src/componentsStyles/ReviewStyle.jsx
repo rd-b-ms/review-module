@@ -39,6 +39,7 @@ const ReviewContainer = styled.div`
   margin-bottom: 35px;
   max-width: 696px;
   margin-left: 70px;
+  padding-bottom: 10px;
   border-bottom: solid #ebebeb;
   border-width: thin;
 `;
