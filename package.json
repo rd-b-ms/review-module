@@ -9,7 +9,7 @@
   },
   "scripts": {
     "react-dev": "webpack -d --watch",
-    "start": "nodemon server/index.js",
+    "start": "node server/index.js",
     "shell": "mysql -u root",
     "seed": "node fakerData.js && node server/index.js",
     "test": "jest"
