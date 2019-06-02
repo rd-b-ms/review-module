@@ -6,7 +6,7 @@ services:
       - 'db'
       - 'database_seed'
     ports:
-      - "3001:3001"
+      - "80:3001"
 
   database_seed:
     image: db-seed
