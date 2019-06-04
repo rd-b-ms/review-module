@@ -11,7 +11,7 @@
     "react-dev": "webpack -d --watch",
     "start": "node server/index.js",
     "shell": "mysql -u root",
-    "seed": "node fakerData.js && node server/index.js",
+    "seed": "mysql -u root -p < schema.sql && node fakerData.js",
     "test": "jest"
   },
   "dependencies": {

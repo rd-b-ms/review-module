@@ -27,7 +27,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/messages')
+    axios.get('/messages/1')
       .then((response) => {
         const splitReviewsList = [];
         let fiveReviews = [];

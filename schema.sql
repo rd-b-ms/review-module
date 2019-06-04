@@ -5,10 +5,10 @@ CREATE DATABASE reviews;
 USE reviews;
 
 
-CREATE TABLE listings (
-  listings_id int NOT NULL,
-  PRIMARY KEY (listings_id)
-);
+-- CREATE TABLE listings (
+--   listings_id int NOT NULL,
+--   PRIMARY KEY (listings_id)
+-- );
 CREATE TABLE messages (
   message_id int NOT NULL AUTO_INCREMENT,
   message varchar(5000) NOT NULL,
@@ -22,6 +22,6 @@ CREATE TABLE messages (
   value_rating int NOT NULL,
   username varchar(500),
   profile_pic_url varchar(500),
-  PRIMARY KEY (message_id),
-  FOREIGN KEY (listing_id) REFERENCES listings(listings_id)
+  PRIMARY KEY (message_id)
+  -- FOREIGN KEY (listing_id) REFERENCES listings(listings_id)
 );
