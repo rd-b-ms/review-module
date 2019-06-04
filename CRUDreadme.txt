@@ -40,9 +40,7 @@ Responses:
   }
 
 READ:
-GET /messages
-Query String:
-  listing_id: number
+GET /messages/:id
 Responses:
   Array
   [
