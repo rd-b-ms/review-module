@@ -13,12 +13,41 @@ const Port = 3001;
 app.get('/messages', (req, res) => {
   db.getMessages((err, data) => {
     if (err) {
-      res.status(500);
-      console.log(err);
+      res.status(500).send(err);
     } else {
       res.status(200);
       res.send(data);
     }
+  });
+});
+
+app.post('/messages', (req, res) => {
+  db.createMessage(req.body, (err, result) => {
+    if (err) {
+      res.status(500).send(err);
+      return;
+    }
+    res.json(result);
+  });
+});
+
+app.put('/messages', (req, res) => {
+  db.updateMessage(req.body, (err, result) => {
+    if (err) {
+      res.status(500).send(err);
+      return;
+    }
+    res.json(result);
+  });
+});
+
+app.delete('/messages', (req, res) => {
+  db.deleteMessage(req.body, (err, result) => {
+    if (err) {
+      res.status(500).send(err);
+      return;
+    }
+    res.json(result);
   });
 });
 
