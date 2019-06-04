@@ -2,16 +2,16 @@ const faker = require('faker');
 
 const db = require('./database/index.js');
 
-const listings = () => {
-  for (let i = 0; i < 101; i += 1) {
-    const query = `INSERT INTO listings (listings_id) VALUES ("${i}")`;
-    db.connection.query(query, (error) => {
-      if (error) {
-        console.log('failed to send listing', error);
-      }
-    });
-  }
-};
+// const listings = () => {
+//   for (let i = 0; i < 101; i += 1) {
+//     const query = `INSERT INTO listings (listings_id) VALUES ("${i}")`;
+//     db.connection.query(query, (error) => {
+//       if (error) {
+//         console.log('failed to send listing', error);
+//       }
+//     });
+//   }
+// };
 
 const messages = () => {
   for (let i = 0; i < 10000; i += 1) {
@@ -36,5 +36,5 @@ const messages = () => {
   }
 };
 
-listings();
+// listings();
 messages();
