@@ -22,8 +22,8 @@ const createMessage = ({message, time_made, listing_id, accuracy_rating, communi
 };
 
 //read
-const getMessages = (callback) => {
-  const query = `SELECT * FROM messages WHERE listing_id = ${Math.floor(Math.random() * 100)}`;
+const getMessages = (listing_id, callback) => {
+  const query = `SELECT * FROM messages WHERE listing_id = ${listing_id}`;
   connection.query(query, (err, data) => {
     if (err) {
       callback(err);

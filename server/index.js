@@ -10,8 +10,10 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/../public')));
 const Port = 3001;
 
-app.get('/messages', (req, res) => {
-  db.getMessages((err, data) => {
+app.get('/messages/:id', (req, res) => {
+  console.log(req.params.id)
+  req.params.id = req.params.id || 1;
+  db.getMessages(req.params.id, (err, data) => {
     if (err) {
       res.status(500).send(err);
     } else {
