@@ -66,6 +66,11 @@ PUT /messages
 Query String:
   message_id: number
   message: string
+  Example:
+  {
+	  "message":"this is updated text",
+	  "message_id":"10002"
+  }
 Responses:
   Object
   {
@@ -83,6 +88,10 @@ DELETE:
 DELETE /messages
 Query String:
   message_id: number
+  Example:
+  {
+	  "message_id": "10002"
+  }
 Responses:
   Object
   {
