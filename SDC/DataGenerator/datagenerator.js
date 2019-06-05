@@ -17,42 +17,54 @@ const randomDataGenerator = () => {
     value_rating:faker.random.number({min: 1, max: 5}), //6 value_rating
     message:faker.lorem.paragraph(faker.random.number({min: 1, max: 5})), //7 message
     listing_id:faker.random.number({min: 1, max: 10}), //8 listing_id
-    user_id:faker.random.number({min: 1, max: 9}), //9 user_id
+    // user_id:faker.random.number({min: 1, max: 9}), //9 user_id
   }
 };
 
-const randomUsersGenerator = (numbOfUsers) => {
-  let users = [];
-  writer.pipe(fs.createWriteStream('./dataSets/usersTable.csv'));
-  for (let i = 0; i < numbOfUsers; i++) {
-    let user = {
-      username: faker.name.firstName(), //10 username
-      profile_pic_url: faker.image.avatar(), //11 profile_pic_url
-    };
-    users.push(user);
-    writer.write(user);
-  }
-  writer.end();
-  return users;
-}
+// const randomUsersGenerator = (numbOfUsers) => {
+//   let users = [];
+//   writer.pipe(fs.createWriteStream('./dataSets/usersTable.csv'));
+//   for (let i = 0; i < numbOfUsers; i++) {
+//     let user = {
+//       username: faker.name.firstName(), //10 username
+//       profile_pic_url: faker.image.avatar(), //11 profile_pic_url
+//     };
+//     users.push(user);
+//     writer.write(user);
+//   }
+//   writer.end();
+//   return users;
+// }
 
-var users = randomUsersGenerator(10)
-
+// var users = randomUsersGenerator(10)
 
 const saveToFile = (numbOfReviews) => {
+  writer.pipe(fs.createWriteStream('./dataSets/usersTable.csv'));
   writer1.pipe(fs.createWriteStream('./dataSets/fakeDataSQL.csv'));
   writer2.pipe(fs.createWriteStream('./dataSets/fakeDataNoSQL.csv'));
-  for (let i = 0; i < numbOfReviews; i++) {
-    let randomData = randomDataGenerator();
-    console.log(randomData)
-    writer1.write(randomData);
-    var user_id = randomData.user_id;
-    delete randomData.user_id;
-    randomData.username = users[user_id].username;
-    randomData.profile_pic_url = users[user_id].profile_pic_url;
-    console.log(randomData)
-    writer2.write(randomData);
+  let revIdx = 0;
+  let user_id = 1;
+  while (revIdx < numbOfReviews) {
+    let username = faker.name.firstName();
+    let profile_pic_url = faker.image.avatar();
+    let curUsrReviewCount = 0;
+    let revPerUser = faker.random.number({min: 1, max: 10});
+    writer.write({username, profile_pic_url});
+    while (curUsrReviewCount < revPerUser) {
+      console.log('count:', curUsrReviewCount,'rev:', revPerUser,'i:', revIdx)
+      let randomData = randomDataGenerator();
+      randomData.user_id = user_id;
+      writer1.write(randomData);
+      delete randomData.user_id;
+      randomData.username = username;
+      randomData.profile_pic_url = profile_pic_url;
+      writer2.write(randomData);
+      curUsrReviewCount++;
+      revIdx++;
+    }
+    user_id++;
   }
+  writer.end();
   writer1.end();
   writer2.end();
 }
