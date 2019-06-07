@@ -12,7 +12,9 @@
     "start": "node server/index.js",
     "shell": "mysql -u root",
     "seed": "mysql -u root -p < schema.sql && node fakerData.js",
-    "test": "jest"
+    "test": "jest",
+    "seed-postgres": "psql -U postgres < SDC/Postgres/schema.sql",
+    "gen-data": "sudo node --max-old-space-size=4096 SDC/DataGenerator/datagenerator.js" 
   },
   "dependencies": {
     "axios": "^0.18.0",

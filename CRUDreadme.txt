@@ -63,7 +63,7 @@ Responses:
       },
       {...}
     ]
-  Failure: 200
+  Failure: 500
 
 UPDATE:
 PUT /messages

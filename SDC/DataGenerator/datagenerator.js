@@ -2,9 +2,9 @@ const faker = require('faker');
 const path = require('path');
 const fs = require('fs');
 const csvWriter = require('csv-write-stream');
-var writer = csvWriter();
-var writer1 = csvWriter();
-var writer2 = csvWriter();
+var writerUser = csvWriter();
+var writerCsvSql = csvWriter();
+var writerCsvNoSql = csvWriter();
 
 const dataGenerator = () => {
   const output = {
@@ -39,7 +39,7 @@ const randomDataGenerator = () => {
 };
 
 const saveUserToFile = (numbOfUsers) => {
-  writer.pipe(fs.createWriteStream(path.join(__dirname,'./dataSets/usersTable.csv')));
+  writerUser.pipe(fs.createWriteStream(path.join(__dirname,'./dataSets/usersTable.csv')));
   for (let i = 1; i <= numbOfUsers; i++) {
     let username = generatedData.username[(Math.floor(Math.random()*100))];
     let profile_pic_url = generatedData.profile_pic_url[(Math.floor(Math.random()*100))];
@@ -61,8 +61,8 @@ const saveDataToFile = (numbOfReviews) => {
     for (let i = 0; i < resultArray.length; i++) {
       userList[i] = resultArray[i].split(',');
     } 
-    writer1.pipe(fs.createWriteStream(path.join(__dirname,'./dataSets/fakeDataSQL.csv')));
-    writer2.pipe(fs.createWriteStream(path.join(__dirname,'./dataSets/fakeDataNoSQL.csv')));
+    writerCsvSql.pipe(fs.createWriteStream(path.join(__dirname,'./dataSets/fakeDataSQL.csv')));
+    writerCsvNoSql.pipe(fs.createWriteStream(path.join(__dirname,'./dataSets/fakeDataNoSQL.csv')));
     let revCount = 0;
     while (revCount < numbOfReviews) {
       let randomData = randomDataGenerator();
