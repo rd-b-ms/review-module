@@ -29,7 +29,7 @@ app.post('/messages', (req, res) => {
       res.status(500).send(err);
       return;
     }
-    res.json(result);
+    res.status(201).json(result);
   });
 });
 
@@ -39,7 +39,7 @@ app.put('/messages', (req, res) => {
       res.status(500).send(err);
       return;
     }
-    res.json(result);
+    res.status(202).json(result);
   });
 });
 
@@ -49,7 +49,7 @@ app.delete('/messages', (req, res) => {
       res.status(500).send(err);
       return;
     }
-    res.json(result);
+    res.status(200).json(result);
   });
 });
 
