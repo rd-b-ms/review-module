@@ -1,0 +1,125 @@
+SUMMARY:
+
+Operation	|Number of Queries	|Postgres Execution Time (ms) (avg)	|Cassandra Execution Time (ms) (avg)	|Decision
+CREATE	  |5	                |0.61	                              |3.73	                                |Postgres is faster.
+READ	    |8	                |5.31	                              |34.88	                              |Postgres is faster.
+UPDATE	  |5	                |1.81	                              |1.61	                                |Similar.
+DELETE	  |5	                |1.10	                              |3.52	                                |Postgres is faster.
+
+
+***********************************************************************************************
+POSTGRES: https://imgur.com/a/pioJeCD
+
+READ:
+SELECT * FROM bnbReview LEFT JOIN bnbUsers ON bnbReview.user_id = bnbUsers.id WHERE listing_id = 3192020;
+    id    |                                                                                                                                                                                       message                                                                                                                                                                                        |  time_made   | accuracy_rating | communication_rating | cleanliness_rating | location_rating | check_in_rating | value_rating | user_id | listing_id | id  | username |                          profile_pic_url                           
+----------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+-----------------+----------------------+--------------------+-----------------+-----------------+--------------+---------+------------+-----+----------+--------------------------------------------------------------------
+ 43283373 | Voluptas sed architecto enim dignissimos sit voluptatem accusamus nisi aliquid. Sit aperiam qui error repudiandae libero et.                                                                                                                                                                                                                                                         | October 2016 |               3 |                    2 |                  4 |               5 |               4 |            2 |     523 |    3192020 | 523 | Kareem   | https://s3.amazonaws.com/uifaces/faces/twitter/charliegann/128.jpg
+ 13744452 | Inventore quidem distinctio autem quae et possimus ducimus harum aut. Totam necessitatibus sunt rerum minus nesciunt ea. Dolorum est harum hic. Provident adipisci est voluptatibus non explicabo. Laudantium fugiat impedit. Rerum perferendis est dolorum totam tempora quisquam. Voluptas vitae cumque eligendi temporibus accusamus qui quibusdam mollitia. Dolorem ipsa et aut. | August 2017  |               4 |                    5 |                  2 |               1 |               3 |            1 |     750 |    3192020 | 750 | Rocky    | https://s3.amazonaws.com/uifaces/faces/twitter/swaplord/128.jpg
+ 20781185 | Repellendus non consequatur doloribus perferendis dolorem autem. Nam rem consequuntur.                                                                                                                                                                                                                                                                                               | March 2018   |               2 |                    4 |                  5 |               4 |               4 |            1 |     965 |    3192020 | 965 | Darrick  | https://s3.amazonaws.com/uifaces/faces/twitter/linux29/128.jpg
+(3 rows)
+
+Time: 21.137 ms
+
+CREATE:
+INSERT INTO bnbReview (time_made, accuracy_rating, communication_rating, cleanliness_rating, location_rating, check_in_rating, value_rating, message, listing_id, user_id) VALUES ('May 2017',1,3,1,3,1,1,'Eum voluptatem eos consequatur magni ad ad cum quis. Enim optio quis. Quis temporibus a et quam quasi et et et adipisci.',7315825,150);
+INSERT 0 1
+Time: 0.817 ms
+
+UPDATE:
+UPDATE bnbReview SET message = 'Quis a cum officiis porro laboriosam ipsa et tempore sequi. Doloremque perferendis consequatur tempore voluptate ut veritatis sequi praesentium. Odit velit qui consequatur. Voluptatem vero eum ea rerum est qui dolor. Quo reiciendis quos. Illum ipsum deserunt velit commodi at eligendi repellendus ut. Quae corrupti dolores illum cupiditate a distinctio numquam.' WHERE id = 24016126;
+UPDATE 1
+Time: 2.637 ms
+
+DELETE:
+DELETE FROM bnbReview WHERE id = 38148485;
+DELETE 1
+Time: 1.775 ms
+
+***********************************************************************************************
+CASSANDRA: https://imgur.com/a/yUVroi0
+
+READ:
+SELECT * FROM reviews.bnbReview WHERE listing_id = 6648047;
+listing_id | id      | accuracy_rating | check_in_rating | cleanliness_rating | communication_rating | location_rating | message                                                                                                                                                                                                                                                                | profile_pic_url                                                        | time_made     | user_id | username | value_rating
+------------+---------+-----------------+-----------------+--------------------+----------------------+-----------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------+---------------+---------+----------+--------------
+    6648047 | 1855674 |               2 |               1 |                  3 |                    3 |               1 |                                                                                                                                                                                       Corporis laboriosam maiores odio dolorum. Repellendus rerum qui adipisci fugiat. |       https://s3.amazonaws.com/uifaces/faces/twitter/yayteejay/128.jpg |  October 2016 |     760 |   Stevie |            5
+    6648047 | 2549852 |               4 |               4 |                  1 |                    5 |               4 |                                                                                                                                                       Cupiditate nihil in deleniti. Officiis aut ipsum et. Nesciunt et totam est id nisi consectetur eveniet deleniti. |       https://s3.amazonaws.com/uifaces/faces/twitter/leemunroe/128.jpg | December 2018 |     583 |   Yazmin |            3
+    6648047 | 6773694 |               1 |               1 |                  5 |                    2 |               4 | Enim occaecati pariatur natus. Ad cumque omnis ut quo explicabo laborum aut. Est enim consequatur velit ratione quod ipsum sapiente aut quia. Ipsam facilis voluptas. Perspiciatis velit ut ullam illum velit illum quod. Impedit rerum quis et ad reprehenderit odio. | https://s3.amazonaws.com/uifaces/faces/twitter/mikemai2awesome/128.jpg |    April 2017 |     817 |    Green |            2
+    6648047 | 7401597 |               5 |               2 |                  1 |                    5 |               5 |                                                                                                                                         Architecto rerum minus asperiores. Eius non nobis et et corrupti eius sit illo. Laborum quasi eveniet. Blanditiis ipsam omnis. |         https://s3.amazonaws.com/uifaces/faces/twitter/maiklam/128.jpg |     June 2017 |     403 |  Darrick |            4
+    6648047 | 8504212 |               4 |               2 |                  2 |                    1 |               1 |                                         Labore dolores quisquam nihil. A voluptatibus voluptate ut qui ipsum maiores. Et delectus tempore deleniti enim. Rem voluptatem vero. Adipisci explicabo veniam laboriosam dolores perspiciatis. Optio cumque recusandae quis. |        https://s3.amazonaws.com/uifaces/faces/twitter/iamglimy/128.jpg | February 2017 |     258 |     Lola |            4
+
+(5 rows)
+
+Tracing session: 90c0f370-8a4d-11e9-be38-4d7f5ac4c922
+
+ activity                                                                                          | timestamp                  | source    | source_elapsed | client
+---------------------------------------------------------------------------------------------------+----------------------------+-----------+----------------+-----------
+                                                                                Execute CQL3 query | 2019-06-08 17:28:55.719000 | 127.0.0.1 |              0 | 127.0.0.1
+ Parsing SELECT * FROM reviews.bnbReview WHERE listing_id = 6648047; [Native-Transport-Requests-1] | 2019-06-08 17:28:55.719000 | 127.0.0.1 |            182 | 127.0.0.1
+                                                 Preparing statement [Native-Transport-Requests-1] | 2019-06-08 17:28:55.720000 | 127.0.0.1 |            414 | 127.0.0.1
+                                       Executing single-partition query on bnbreview [ReadStage-2] | 2019-06-08 17:28:55.723000 | 127.0.0.1 |           3668 | 127.0.0.1
+                                                        Acquiring sstable references [ReadStage-2] | 2019-06-08 17:28:55.723000 | 127.0.0.1 |           3766 | 127.0.0.1
+          Skipped 0/13 non-slice-intersecting sstables, included 0 due to tombstones [ReadStage-2] | 2019-06-08 17:28:55.724000 | 127.0.0.1 |           4517 | 127.0.0.1
+                                Partition index with 0 entries found for sstable 332 [ReadStage-2] | 2019-06-08 17:28:55.735000 | 127.0.0.1 |          15792 | 127.0.0.1
+                                Partition index with 0 entries found for sstable 488 [ReadStage-2] | 2019-06-08 17:28:55.742000 | 127.0.0.1 |          22705 | 127.0.0.1
+                                            Bloom filter allows skipping sstable 168 [ReadStage-2] | 2019-06-08 17:28:55.745000 | 127.0.0.1 |          25557 | 127.0.0.1
+                                            Bloom filter allows skipping sstable 491 [ReadStage-2] | 2019-06-08 17:28:55.746000 | 127.0.0.1 |          26512 | 127.0.0.1
+                                Partition index with 0 entries found for sstable 522 [ReadStage-2] | 2019-06-08 17:28:55.750000 | 127.0.0.1 |          30895 | 127.0.0.1
+                                            Bloom filter allows skipping sstable 559 [ReadStage-2] | 2019-06-08 17:28:55.752000 | 127.0.0.1 |          33172 | 127.0.0.1
+                                            Bloom filter allows skipping sstable 201 [ReadStage-2] | 2019-06-08 17:28:55.755000 | 127.0.0.1 |          35318 | 127.0.0.1
+                                            Bloom filter allows skipping sstable 596 [ReadStage-2] | 2019-06-08 17:28:55.755000 | 127.0.0.1 |          35483 | 127.0.0.1
+                                Partition index with 0 entries found for sstable 602 [ReadStage-2] | 2019-06-08 17:28:55.755000 | 127.0.0.1 |          35786 | 127.0.0.1
+                                            Bloom filter allows skipping sstable 365 [ReadStage-2] | 2019-06-08 17:28:55.756000 | 127.0.0.1 |          36847 | 127.0.0.1
+                                            Bloom filter allows skipping sstable 611 [ReadStage-2] | 2019-06-08 17:28:55.756000 | 127.0.0.1 |          36944 | 127.0.0.1
+                                            Bloom filter allows skipping sstable 612 [ReadStage-2] | 2019-06-08 17:28:55.756000 | 127.0.0.1 |          37027 | 127.0.0.1
+                                            Bloom filter allows skipping sstable 613 [ReadStage-2] | 2019-06-08 17:28:55.756001 | 127.0.0.1 |          37073 | 127.0.0.1
+                                           Merged data from memtables and 4 sstables [ReadStage-2] | 2019-06-08 17:28:55.756001 | 127.0.0.1 |          37235 | 127.0.0.1
+                                              Read 5 live rows and 0 tombstone cells [ReadStage-2] | 2019-06-08 17:28:55.757000 | 127.0.0.1 |          37686 | 127.0.0.1
+                                                                                  Request complete | 2019-06-08 17:28:55.757659 | 127.0.0.1 |          38659 | 127.0.0.1
+
+
+CREATE:
+INSERT INTO reviews.bnbReview (time_made,accuracy_rating,communication_rating,cleanliness_rating,location_rating,check_in_rating,value_rating,message,listing_id,user_id,username,profile_pic_url,id) VALUES ('November 2017',1,5,5,2,1,3,'Quia est voluptates qui repellendus aut. At asperiores beatae. Sint magnam animi. Fuga magni iure adipisci iure asperiores est cum. Odit corrupti officia voluptatem pariatur neque. Et odit dolor laboriosam. Rerum et dolores.',1552586,86,'Ward','https://s3.amazonaws.com/uifaces/faces/twitter/sunlandictwin/128.jpg',99); 
+
+Tracing session: dd51fc50-8acc-11e9-be38-4d7f5ac4c922
+
+ activity                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | timestamp                  | source    | source_elapsed | client
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------+-----------+----------------+-----------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               Execute CQL3 query | 2019-06-09 08:40:10.261000 | 127.0.0.1 |              0 | 127.0.0.1
+ Parsing INSERT INTO reviews.bnbReview (time_made,accuracy_rating,communication_rating,cleanliness_rating,location_rating,check_in_rating,value_rating,message,listing_id,user_id,username,profile_pic_url,id) VALUES ('November 2017',1,5,5,2,1,3,'Quia est voluptates qui repellendus aut. At asperiores beatae. Sint magnam animi. Fuga magni iure adipisci iure asperiores est cum. Odit corrupti officia voluptatem pariatur neque. Et odit dolor laboriosam. Rerum et dolores.',1552586,86,'Ward','https://s3.amazonaws.com/uifaces/faces/twitter/sunlandictwin/128.jpg',99); [Native-Transport-Requests-1] | 2019-06-09 08:40:10.261000 | 127.0.0.1 |            226 | 127.0.0.1
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Preparing statement [Native-Transport-Requests-1] | 2019-06-09 08:40:10.261000 | 127.0.0.1 |            515 | 127.0.0.1
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  Determining replicas for mutation [Native-Transport-Requests-1] | 2019-06-09 08:40:10.262000 | 127.0.0.1 |           1224 | 127.0.0.1
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         Appending to commitlog [MutationStage-2] | 2019-06-09 08:40:10.262000 | 127.0.0.1 |           1405 | 127.0.0.1
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   Adding to bnbreview memtable [MutationStage-2] | 2019-06-09 08:40:10.262000 | 127.0.0.1 |           1511 | 127.0.0.1
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Request complete | 2019-06-09 08:40:10.262645 | 127.0.0.1 |           1645 | 127.0.0.1
+
+DELETE FROM reviews.bnbReview WHERE listing_id = 6648047 AND id = 1855674;
+Tracing session: ac5621a0-8acf-11e9-be38-4d7f5ac4c922
+
+ activity                                                                                                         | timestamp                  | source    | source_elapsed | client
+------------------------------------------------------------------------------------------------------------------+----------------------------+-----------+----------------+-----------
+                                                                                               Execute CQL3 query | 2019-06-09 09:00:16.570000 | 127.0.0.1 |              0 | 127.0.0.1
+ Parsing DELETE FROM reviews.bnbReview WHERE listing_id = 6648047 AND id = 1855674; [Native-Transport-Requests-1] | 2019-06-09 09:00:16.570000 | 127.0.0.1 |            131 | 127.0.0.1
+                                                                Preparing statement [Native-Transport-Requests-1] | 2019-06-09 09:00:16.571000 | 127.0.0.1 |            689 | 127.0.0.1
+                                                  Determining replicas for mutation [Native-Transport-Requests-1] | 2019-06-09 09:00:16.576000 | 127.0.0.1 |           6085 | 127.0.0.1
+                                                                         Appending to commitlog [MutationStage-3] | 2019-06-09 09:00:16.577000 | 127.0.0.1 |           6591 | 127.0.0.1
+                                                                   Adding to bnbreview memtable [MutationStage-3] | 2019-06-09 09:00:16.580000 | 127.0.0.1 |           9366 | 127.0.0.1
+                                                                                                 Request complete | 2019-06-09 09:00:16.580163 | 127.0.0.1 |          10163 | 127.0.0.1
+
+
+UPDATE reviews.bnbReview SET message = 'This is the new message.' WHERE listing_id = 4363979 AND id = 9176351;
+
+Tracing session: e85bed00-8ad0-11e9-be38-4d7f5ac4c922
+
+ activity                                                                                                                                             | timestamp                  | source    | source_elapsed | client
+------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------+-----------+----------------+-----------
+                                                                                                                                   Execute CQL3 query | 2019-06-09 09:09:06.768000 | 127.0.0.1 |              0 | 127.0.0.1
+ Parsing UPDATE reviews.bnbReview SET message = 'This is the new message.' WHERE listing_id = 4363979 AND id = 9176351; [Native-Transport-Requests-1] | 2019-06-09 09:09:06.768000 | 127.0.0.1 |            199 | 127.0.0.1
+                                                                                                    Preparing statement [Native-Transport-Requests-1] | 2019-06-09 09:09:06.769000 | 127.0.0.1 |            881 | 127.0.0.1
+                                                                                      Determining replicas for mutation [Native-Transport-Requests-1] | 2019-06-09 09:09:06.773000 | 127.0.0.1 |           5154 | 127.0.0.1
+                                                                                                             Appending to commitlog [MutationStage-2] | 2019-06-09 09:09:06.774000 | 127.0.0.1 |           5419 | 127.0.0.1
+                                                                                                       Adding to bnbreview memtable [MutationStage-2] | 2019-06-09 09:09:06.776000 | 127.0.0.1 |           7613 | 127.0.0.1
+                                                                                                                                     Request complete | 2019-06-09 09:09:06.776391 | 127.0.0.1 |           8391 | 127.0.0.1
+
+

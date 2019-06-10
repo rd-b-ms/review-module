@@ -18,8 +18,8 @@ CREATE TABLE bnbReview (
   username TEXT,
   profile_pic_url TEXT,
   user_id INT,
-  PRIMARY KEY (username, listing_id)
+  PRIMARY KEY (listing_id, id)
 );
 
-COPY reviews.bnbReview (time_made,accuracy_rating,communication_rating,cleanliness_rating,location_rating,check_in_rating,value_rating,message,listing_id,user_id,username,profile_pic_url,id) FROM '/Users/rogerdunn/Desktop/Programming/HRSF117/SDC/Review-module/SDC/DataGenerator/dataSets/fakeDataNoSQL.csv' WITH HEADER = true;
+COPY reviews.bnbReview (time_made,accuracy_rating,communication_rating,cleanliness_rating,location_rating,check_in_rating,value_rating,message,listing_id,user_id,username,profile_pic_url,id) FROM '/Users/rogerdunn/Desktop/Programming/HRSF117/SDC/Review-module/SDC/DataGenerator/dataSets/fakeDataNoSQL4.csv' WITH HEADER = true;
 
