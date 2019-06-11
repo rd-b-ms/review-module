@@ -49,6 +49,7 @@
     "eslint-plugin-react": "^7.13.0",
     "i": "^0.3.6",
     "jest": "^24.8.0",
+    "newrelic": "^5.9.1",
     "npm": "^6.9.0",
     "puppeteer": "^1.16.0",
     "react-test-renderer": "^16.8.6",

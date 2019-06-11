@@ -1,7 +1,9 @@
+var newrelic = require('newrelic');
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const db = require('../database/index.js');
+const PG = require('../database/indexPG.js');
 
 const app = express();
 
@@ -13,7 +15,7 @@ const Port = 3001;
 app.get('/messages/:id', (req, res) => {
   console.log(req.params.id)
   req.params.id = req.params.id || 1;
-  db.getMessages(req.params.id, (err, data) => {
+  PG.getMessages(req.params.id, (err, data) => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -24,7 +26,7 @@ app.get('/messages/:id', (req, res) => {
 });
 
 app.post('/messages', (req, res) => {
-  db.createMessage(req.body, (err, result) => {
+  PG.createMessage(req.body, (err, result) => {
     if (err) {
       res.status(500).send(err);
       return;
@@ -34,7 +36,7 @@ app.post('/messages', (req, res) => {
 });
 
 app.put('/messages', (req, res) => {
-  db.updateMessage(req.body, (err, result) => {
+  PG.updateMessage(req.body, (err, result) => {
     if (err) {
       res.status(500).send(err);
       return;
@@ -44,7 +46,7 @@ app.put('/messages', (req, res) => {
 });
 
 app.delete('/messages', (req, res) => {
-  db.deleteMessage(req.body, (err, result) => {
+  PG.deleteMessage(req.body, (err, result) => {
     if (err) {
       res.status(500).send(err);
       return;
@@ -52,6 +54,50 @@ app.delete('/messages', (req, res) => {
     res.status(200).json(result);
   });
 });
+
+
+// app.get('/messages/:id', (req, res) => {
+//   console.log(req.params.id)
+//   req.params.id = req.params.id || 1;
+//   db.getMessages(req.params.id, (err, data) => {
+//     if (err) {
+//       res.status(500).send(err);
+//     } else {
+//       res.status(200);
+//       res.send(data);
+//     }
+//   });
+// });
+
+// app.post('/messages', (req, res) => {
+//   db.createMessage(req.body, (err, result) => {
+//     if (err) {
+//       res.status(500).send(err);
+//       return;
+//     }
+//     res.status(201).json(result);
+//   });
+// });
+
+// app.put('/messages', (req, res) => {
+//   db.updateMessage(req.body, (err, result) => {
+//     if (err) {
+//       res.status(500).send(err);
+//       return;
+//     }
+//     res.status(202).json(result);
+//   });
+// });
+
+// app.delete('/messages', (req, res) => {
+//   db.deleteMessage(req.body, (err, result) => {
+//     if (err) {
+//       res.status(500).send(err);
+//       return;
+//     }
+//     res.status(200).json(result);
+//   });
+// });
 
 app.listen(Port, () => {
   console.log('Listening on port', Port);
