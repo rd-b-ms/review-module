@@ -14,7 +14,8 @@
     "seed": "mysql -u root -p < schema.sql && node fakerData.js",
     "test": "jest",
     "seed-postgres": "psql -U postgres < SDC/Postgres/schema.sql",
-    "gen-data": "sudo node --max-old-space-size=4096 SDC/DataGenerator/datagenerator.js"
+    "gen-data": "sudo node --max-old-space-size=4096 SDC/DataGenerator/datagenerator.js",
+    "k6": "k6 run ./SDC/k6/script.js"
   },
   "dependencies": {
     "axios": "^0.18.0",

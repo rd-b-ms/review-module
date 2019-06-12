@@ -12,8 +12,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/../public')));
 const Port = 3001;
 
-app.get('/messages/:id', (req, res) => {
-  console.log(req.params.id)
+app.get('/messages/:id', function getting(req, res) {
   req.params.id = req.params.id || 1;
   PG.getMessages(req.params.id, (err, data) => {
     if (err) {
@@ -25,9 +24,11 @@ app.get('/messages/:id', (req, res) => {
   });
 });
 
-app.post('/messages', (req, res) => {
+app.post('/messages', function posting (req, res) {
+  // console.log(req.body);
   PG.createMessage(req.body, (err, result) => {
     if (err) {
+      newrelic.noticeError(err);
       res.status(500).send(err);
       return;
     }
@@ -55,6 +56,9 @@ app.delete('/messages', (req, res) => {
   });
 });
 
+app.get('/listings/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
 
 // app.get('/messages/:id', (req, res) => {
 //   console.log(req.params.id)
