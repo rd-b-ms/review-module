@@ -15,11 +15,13 @@
     "test": "jest",
     "seed-postgres": "psql -U postgres < SDC/Postgres/schema.sql",
     "gen-data": "sudo node --max-old-space-size=4096 SDC/DataGenerator/datagenerator.js",
-    "k6": "k6 run ./SDC/k6/script.js"
+    "k6": "k6 run ./SDC/k6/script.js",
+    "pm2": "pm2 start -i 0 ./server/index.js --node-args='max-old-space-size=4096'"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "faker": "^4.1.0",
     "fast-csv": "^2.5.0",

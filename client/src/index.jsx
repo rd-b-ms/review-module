@@ -4,4 +4,4 @@ import App from './component/App.jsx';
 
 var path = window.location.pathname;
 
-ReactDOM.render(<App path={path} />, document.getElementById('app'));
+ReactDOM.render(<App path={path} />, document.getElementById('reviews'));
