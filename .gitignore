@@ -26,3 +26,7 @@ public/bundle.js
 
 # Ignore raw CSV files for seeding
 SDC/DataGenerator/dataSets
+
+# Ignore new relic file
+newrelic.js
+newrelic_agent.log

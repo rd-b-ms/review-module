@@ -26,3 +26,5 @@ CREATE TABLE bnbReview (
 
 \COPY bnbUsers (username, profile_pic_url) FROM '/Users/rogerdunn/Desktop/Programming/HRSF117/SDC/Review-module/SDC/DataGenerator/dataSets/usersTable.CSV' DELIMITERS ',' CSV HEADER;
 \COPY bnbReview (time_made, accuracy_rating, communication_rating, cleanliness_rating, location_rating, check_in_rating, value_rating, message, listing_id, user_id) FROM '/Users/rogerdunn/Desktop/Programming/HRSF117/SDC/Review-module/SDC/DataGenerator/dataSets/fakeDataSQL.CSV' DELIMITERS ',' CSV HEADER;
+-- \COPY bnbReview (time_made, accuracy_rating, communication_rating, cleanliness_rating, location_rating, check_in_rating, value_rating, message, listing_id, user_id) FROM '/Users/rogerdunn/Desktop/Programming/HRSF117/SDC/Review-module/SDC/DataGenerator/dataSets/fakeDataSQL2.CSV' DELIMITERS ',' CSV HEADER;
+-- \COPY bnbReview (time_made, accuracy_rating, communication_rating, cleanliness_rating, location_rating, check_in_rating, value_rating, message, listing_id, user_id) FROM '/Users/rogerdunn/Desktop/Programming/HRSF117/SDC/Review-module/SDC/DataGenerator/dataSets/fakeDataSQL3.CSV' DELIMITERS ',' CSV HEADER;

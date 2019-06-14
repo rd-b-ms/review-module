@@ -18,6 +18,7 @@ class App extends React.Component {
       searchWord: '',
       searchWordNotFound: false,
       allSearchReviews: 0,
+      listing_id: this.props.path.split('/')[2] || 1,
     };
     this.handlePageClick = this.handlePageClick.bind(this);
     this.backArrowClicked = this.backArrowClicked.bind(this);
@@ -27,7 +28,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/messages/1')
+    console.log(this.state.listing_id)
+    axios.get(`/messages/${this.state.listing_id}`)
       .then((response) => {
         const splitReviewsList = [];
         let fiveReviews = [];
