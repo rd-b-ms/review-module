@@ -1,5 +1,5 @@
 const newrelic = require('newrelic');
-const cluster = require('cluster');
+// const cluster = require('cluster');
 // if (cluster.isMaster) {
 //   var cpuCount = require('os').cpus().length;
 //     for (var i = 0; i < cpuCount; i += 1) {
@@ -37,7 +37,6 @@ const cluster = require('cluster');
     // console.log(req.body);
     PG.createMessage(req.body, (err, result) => {
       if (err) {
-        newrelic.noticeError(err);
         res.status(500).send(err);
         return;
       }

@@ -10,8 +10,8 @@ const pool = new Pool({
 // client.connect();
 
 const getMessages = (listing_id, callback) => {
-  let sql = `SELECT * FROM bnbReview LEFT JOIN bnbUsers ON bnbReview.user_id = bnbUsers.id WHERE listing_id = ${listing_id}`;
-  pool.query(sql, (err, result) => {
+  let sql = 'SELECT * FROM bnbReview LEFT JOIN bnbUsers ON bnbReview.user_id = bnbUsers.id WHERE listing_id = $1';
+  pool.query(sql, [listing_id], (err, result) => {
     if (err) {
       callback(err);
       return;
@@ -21,8 +21,8 @@ const getMessages = (listing_id, callback) => {
 };
 
 const createMessage = ({message, time_made, listing_id, accuracy_rating, communication_rating, cleanliness_rating, location_rating, check_in_rating, value_rating, user_id}, callback) => {
-  let sql = `INSERT INTO bnbReview (message, time_made, listing_id, accuracy_rating, communication_rating, cleanliness_rating, location_rating, check_in_rating, value_rating, user_id) VALUES ('${message}', '${time_made}', ${listing_id}, ${accuracy_rating}, ${communication_rating}, ${cleanliness_rating}, ${location_rating}, ${check_in_rating}, ${value_rating}, ${user_id})`;
-  pool.query(sql, (err, result) => {
+  let sql = 'INSERT INTO bnbReview (message, time_made, listing_id, accuracy_rating, communication_rating, cleanliness_rating, location_rating, check_in_rating, value_rating, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)';
+  pool.query(sql, [message, time_made, listing_id, accuracy_rating, communication_rating, cleanliness_rating, location_rating, check_in_rating, value_rating, user_id], (err, result) => {
     if (err) {
       callback(err);
       return;
@@ -32,8 +32,8 @@ const createMessage = ({message, time_made, listing_id, accuracy_rating, communi
 };
 
 const updateMessage = ({message, id}, callback) => {
-  const sql = `UPDATE bnbReview SET message = '${message}' WHERE id = ${id}`;
-  pool.query(sql, (err, result) => {
+  const sql = 'UPDATE bnbReview SET message = $1 WHERE id = $2';
+  pool.query(sql, [message, id], (err, result) => {
     if (err) {
       callback(err);
       return;
@@ -43,8 +43,8 @@ const updateMessage = ({message, id}, callback) => {
 };
 
 const deleteMessage = ({id}, callback) => {
-  let sql = `DELETE FROM bnbReview WHERE id = ${id}`;
-  pool.query(sql, (err, result) => {
+  let sql = 'DELETE FROM bnbReview WHERE id = $1';
+  pool.query(sql, [id], (err, result) => {
     if (err) {
       callback(err);
       return;
