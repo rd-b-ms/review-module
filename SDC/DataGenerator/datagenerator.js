@@ -65,7 +65,7 @@ const saveDataToFile = (numbOfReviews) => {
     for (let i = 0; i < resultArray.length; i++) {
       userList[i] = resultArray[i].split(',');
     } 
-    writerCsvSql.pipe(fs.createWriteStream(path.join(__dirname,'./dataSets/fakeDataSQL5.csv')));
+    writerCsvSql.pipe(fs.createWriteStream(path.join(__dirname,'./dataSets/fakeDataSQL1.csv')));
     // writerCsvNoSql.pipe(fs.createWriteStream(path.join(__dirname,'./dataSets/fakeDataNoSQL6.csv')));
     let revCount = 0;
     while (revCount < numbOfReviews) {

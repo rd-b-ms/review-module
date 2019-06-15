@@ -28,5 +28,5 @@ public/bundle.js
 SDC/DataGenerator/dataSets
 
 # Ignore new relic file
-newrelic.js
+newrelickey.js
 newrelic_agent.log

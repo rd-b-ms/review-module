@@ -9,6 +9,7 @@
   },
   "scripts": {
     "react-dev": "webpack -d --watch",
+    "webpack-prod": "webpack -p",
     "start": "node server/index.js",
     "shell": "mysql -u root",
     "seed": "mysql -u root -p < schema.sql && node fakerData.js",
