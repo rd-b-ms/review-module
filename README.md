@@ -40,4 +40,5 @@ npm run start // Starts your server
 ```
 
 npm install
+npm run webpack-prod
 npm run start
