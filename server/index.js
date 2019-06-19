@@ -10,7 +10,7 @@ const newrelic = require('newrelic');
   const express = require('express');
   const path = require('path');
   const bodyParser = require('body-parser');
-  const db = require('../database/index.js');
+  // const db = require('../database/index.js');
   const PG = require('../database/indexPG.js');
   const cors = require('cors');
   

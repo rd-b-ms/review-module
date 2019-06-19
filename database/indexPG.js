@@ -2,7 +2,7 @@ const {Pool} = require('pg');
 
 const pool = new Pool({
   user: 'client',
-  host: '3.18.220.174',
+  host: '18.219.122.66',
   database: 'reviews',
   password: 'hackreactor',
   port: 5432,
@@ -27,7 +27,13 @@ const createMessage = ({message, time_made, listing_id, accuracy_rating, communi
       callback(err);
       return;
     }
-    callback(null, result);
+    getMessages(listing_id, (err, results) => {
+      if (err) {
+        callback(err);
+        return;
+      }
+      callback(null, {listing_id, results});
+    })
   });
 };
 
