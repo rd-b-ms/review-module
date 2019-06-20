@@ -32,7 +32,12 @@ class App extends React.Component {
     axios.get(`/messages/${this.state.listing_id}`)
       .then((response) => {
         const splitReviewsList = [];
-        let fiveReviews = [];
+	if (typeof response.data === 'string') {
+          response.data = JSON.parse(response.data);
+        }
+	console.log(response);
+	
+	      let fiveReviews = [];
         for (let i = 0; i < response.data.length; i += 1) {
           if (fiveReviews.length === 5) {
             splitReviewsList.push(fiveReviews);
