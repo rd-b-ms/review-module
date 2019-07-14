@@ -1,32 +1,24 @@
-# Project Name
+# Reviews Module for WhereBnB
 
-> Project description
+This is the Reviews module for WhereBnB, a web application for booking vacation rentals. The front-end consists of reusable React components. The back-end consists of a Node.js server with a PostgreSQL database. A Cassandra database was used as comparison, but the PostgreSQL database was selected. 
+
+The service and proxy server were deployed on several AWS EC2 instances, utilizing horizontal scaling through Nginx load balancers. Performance targeted >1000 RPS throughput and <2000ms latency. Additionally, Redis cache was applied for quick responses for get requests to popular hotel listings. 
+
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/rd-b-ms/photo-module
+  - https://github.com/rd-b-ms/bookings-module
+  - https://github.com/rd-b-ms/listingInfo-module
+  - https://github.com/rd-b-ms/proxy-bookings
 
-## Table of Contents
-
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
-
-## Usage
-
-> Some usage instructions
 
 ## Requirements
 
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
-
-- Node 6.13.0
-- etc
-
-## Development
+- Node 8.15.1
+- PostgreSQL 11.3
+- Redis-server 5.0.5
+- Nginx 1.17.0
 
 ### Installing Dependencies
 
